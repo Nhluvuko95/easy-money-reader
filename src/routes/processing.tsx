@@ -14,7 +14,7 @@ const STEPS = [
 
 export const Route = createFileRoute("/processing")({
   validateSearch: (search: Record<string, unknown>) => ({
-    name: typeof search.name === "string" ? search.name : "statement.pdf",
+    name: typeof search["name"] === "string" ? (search["name"] as string) : "statement.pdf",
   }),
   head: () => ({
     meta: [
