@@ -10,12 +10,28 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DuplicatesRouteImport } from './routes/duplicates'
 import { Route as ProcessingRouteImport } from './routes/processing'
+import { Route as StatementsRouteImport } from './routes/statements'
+import { Route as SummaryRouteImport } from './routes/summary'
 import { Route as UploadRouteImport } from './routes/upload'
+import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
+import { Route as CategoriesCategoryRouteImport } from './routes/categories.$category'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DuplicatesRoute = DuplicatesRouteImport.update({
+  id: '/duplicates',
+  path: '/duplicates',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProcessingRoute = ProcessingRouteImport.update({
@@ -23,40 +39,112 @@ const ProcessingRoute = ProcessingRouteImport.update({
   path: '/processing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StatementsRoute = StatementsRouteImport.update({
+  id: '/statements',
+  path: '/statements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SummaryRoute = SummaryRouteImport.update({
+  id: '/summary',
+  path: '/summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UploadRoute = UploadRouteImport.update({
   id: '/upload',
   path: '/upload',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
+  id: '/categories/',
+  path: '/categories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesCategoryRoute = CategoriesCategoryRouteImport.update({
+  id: '/categories/$category',
+  path: '/categories/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/duplicates': typeof DuplicatesRoute
   '/processing': typeof ProcessingRoute
+  '/statements': typeof StatementsRoute
+  '/summary': typeof SummaryRoute
   '/upload': typeof UploadRoute
+  '/categories/$category': typeof CategoriesCategoryRoute
+  '/categories/': typeof CategoriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/duplicates': typeof DuplicatesRoute
   '/processing': typeof ProcessingRoute
+  '/statements': typeof StatementsRoute
+  '/summary': typeof SummaryRoute
   '/upload': typeof UploadRoute
+  '/categories/$category': typeof CategoriesCategoryRoute
+  '/categories': typeof CategoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/duplicates': typeof DuplicatesRoute
   '/processing': typeof ProcessingRoute
+  '/statements': typeof StatementsRoute
+  '/summary': typeof SummaryRoute
   '/upload': typeof UploadRoute
+  '/categories/$category': typeof CategoriesCategoryRoute
+  '/categories/': typeof CategoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/processing' | '/upload'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/duplicates'
+    | '/processing'
+    | '/statements'
+    | '/summary'
+    | '/upload'
+    | '/categories/$category'
+    | '/categories/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/processing' | '/upload'
-  id: '__root__' | '/' | '/processing' | '/upload'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/duplicates'
+    | '/processing'
+    | '/statements'
+    | '/summary'
+    | '/upload'
+    | '/categories/$category'
+    | '/categories'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/duplicates'
+    | '/processing'
+    | '/statements'
+    | '/summary'
+    | '/upload'
+    | '/categories/$category'
+    | '/categories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
+  DuplicatesRoute: typeof DuplicatesRoute
   ProcessingRoute: typeof ProcessingRoute
+  StatementsRoute: typeof StatementsRoute
+  SummaryRoute: typeof SummaryRoute
   UploadRoute: typeof UploadRoute
+  CategoriesCategoryRoute: typeof CategoriesCategoryRoute
+  CategoriesIndexRoute: typeof CategoriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,11 +156,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/duplicates': {
+      id: '/duplicates'
+      path: '/duplicates'
+      fullPath: '/duplicates'
+      preLoaderRoute: typeof DuplicatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/processing': {
       id: '/processing'
       path: '/processing'
       fullPath: '/processing'
       preLoaderRoute: typeof ProcessingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/statements': {
+      id: '/statements'
+      path: '/statements'
+      fullPath: '/statements'
+      preLoaderRoute: typeof StatementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/summary': {
+      id: '/summary'
+      path: '/summary'
+      fullPath: '/summary'
+      preLoaderRoute: typeof SummaryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/upload': {
@@ -82,13 +198,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UploadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/categories/': {
+      id: '/categories/'
+      path: '/categories'
+      fullPath: '/categories/'
+      preLoaderRoute: typeof CategoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/$category': {
+      id: '/categories/$category'
+      path: '/categories/$category'
+      fullPath: '/categories/$category'
+      preLoaderRoute: typeof CategoriesCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  DuplicatesRoute: DuplicatesRoute,
   ProcessingRoute: ProcessingRoute,
+  StatementsRoute: StatementsRoute,
+  SummaryRoute: SummaryRoute,
   UploadRoute: UploadRoute,
+  CategoriesCategoryRoute: CategoriesCategoryRoute,
+  CategoriesIndexRoute: CategoriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

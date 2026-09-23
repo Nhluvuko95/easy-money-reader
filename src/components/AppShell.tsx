@@ -17,8 +17,8 @@ export function AppShell({
   children,
 }: {
   title: string;
-  subtitle?: string;
-  back?: { to: string; label: string };
+  subtitle?: string | undefined;
+  back?: { to: string; label: string } | undefined;
   children: ReactNode;
 }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -57,7 +57,7 @@ export function AppShell({
                   to={tab.to}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex min-h-20 flex-col items-center justify-center gap-1 px-1 py-3 text-base font-bold",
+                    "flex min-h-20 flex-col items-center justify-center gap-1 px-1 py-3 text-center text-sm font-bold",
                     active ? "bg-secondary text-primary" : "text-muted-foreground",
                   )}
                 >

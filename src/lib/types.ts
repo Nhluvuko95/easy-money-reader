@@ -4,7 +4,7 @@ export type Transaction = {
   id: string;
   statementId: string;
   date: string; // YYYY-MM-DD
-  time?: string; // HH:MM
+  time?: string | undefined; // HH:MM
   description: string;
   amount: number; // negative = money out, positive = money in
   category: CategoryKey;

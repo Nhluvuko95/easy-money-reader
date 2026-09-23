@@ -75,8 +75,8 @@ export function findDuplicates(txns: Transaction[]): DuplicatePair[] {
   const list = [...txns].sort((a, b) => (a.date < b.date ? -1 : 1));
   for (let i = 0; i < list.length; i++) {
     for (let j = i + 1; j < list.length; j++) {
-      const a = list[i];
-      const b = list[j];
+      const a = list[i]!;
+      const b = list[j]!;
       if (a.amount >= 0 || b.amount >= 0) continue;
       const gap = daysApart(a.date, b.date);
       if (gap > 4) continue;

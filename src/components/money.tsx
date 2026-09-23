@@ -35,11 +35,13 @@ export function MoneyCard({
   amount,
   tone,
   note,
+  signed,
 }: {
   label: string;
   amount: number;
   tone: "in" | "out" | "neutral";
-  note?: string;
+  note?: string | undefined;
+  signed?: boolean | undefined;
 }) {
   return (
     <div
@@ -57,7 +59,7 @@ export function MoneyCard({
           tone === "out" && "text-spend",
         )}
       >
-        {formatRand(Math.abs(amount))}
+        {signed ? formatRand(amount, { signed: true }) : formatRand(Math.abs(amount))}
       </p>
       {note ? <p className="mt-1 text-base text-muted-foreground">{note}</p> : null}
     </div>
