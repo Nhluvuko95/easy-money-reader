@@ -77,9 +77,9 @@ function DuplicatesPage() {
                 <BigButton variant="success" onClick={() => clearDuplicate(p.id)}>
                   Looks fine to me
                 </BigButton>
-                <BigButton variant="secondary" disabled>
-                  Keep it flagged
-                </BigButton>
+                <p className="text-base text-muted-foreground">
+                  If you are not sure, leave it. It stays flagged so you can ask your bank.
+                </p>
               </div>
             </li>
           ))}

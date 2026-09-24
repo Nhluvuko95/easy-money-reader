@@ -49,6 +49,7 @@ function DashboardPage() {
           label="What is left"
           amount={left}
           tone="neutral"
+          signed
           note={left < 0 ? "You spent more than you received." : "Money in less money out."}
         />
       </div>
@@ -76,18 +77,20 @@ function DashboardPage() {
               <Link
                 to="/categories/$category"
                 params={{ category: g.key }}
-                className="card-soft flex items-center gap-4 p-5"
+                className="card-soft block p-5"
               >
-                <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-secondary text-primary">
-                  <CategoryIcon name={g.icon} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="text-xl font-bold">{g.label}</p>
-                  <p className="text-base text-muted-foreground">
-                    {g.count} payment{g.count === 1 ? "" : "s"}
-                  </p>
+                <div className="flex items-center gap-4">
+                  <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-secondary text-primary">
+                    <CategoryIcon name={g.icon} />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xl font-bold">{g.label}</p>
+                    <p className="text-base text-muted-foreground">
+                      {g.count} payment{g.count === 1 ? "" : "s"}
+                    </p>
+                  </div>
                 </div>
-                <p className="shrink-0 text-xl font-bold text-spend">{formatRand(g.total)}</p>
+                <p className="mt-3 text-2xl font-bold text-spend">{formatRand(g.total)}</p>
               </Link>
             </li>
           ))}
