@@ -55,8 +55,8 @@ function CategoriesPage() {
                     <p className="text-xl font-bold">{g.label}</p>
                     <p className="text-base text-muted-foreground">{g.plain}</p>
                   </div>
-                  <p className="shrink-0 text-xl font-bold text-spend">{formatRand(g.total)}</p>
                 </div>
+                <p className="mt-3 text-2xl font-bold text-spend">{formatRand(g.total)}</p>
                 <div className="mt-4 h-4 w-full overflow-hidden rounded-full bg-secondary">
                   <div
                     className="h-full rounded-full bg-primary"
