@@ -3,6 +3,7 @@ import { Camera, FileUp, ShieldCheck } from "lucide-react";
 import { useRef, useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { BigButton } from "@/components/BigButton";
+import { setPendingUpload } from "@/lib/pending-upload";
 
 export const Route = createFileRoute("/upload")({
   head: () => ({
@@ -31,7 +32,17 @@ function UploadPage() {
 
   function handleFile(file: File | undefined) {
     if (!file) return;
+    const okType = file.type === "application/pdf" || file.type.startsWith("image/");
+    if (!okType) {
+      setError("Please choose a PDF or a picture.");
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setError("This file is too big. Please choose one smaller than 10 MB.");
+      return;
+    }
     setError(null);
+    setPendingUpload(file);
     navigate({ to: "/processing", search: { name: file.name } });
   }
 
@@ -91,15 +102,11 @@ function UploadPage() {
       <div className="mt-8 card-soft flex items-start gap-4 p-5">
         <ShieldCheck className="size-10 shrink-0 text-success" aria-hidden />
         <p className="text-lg">
-          Your statement stays on this device. We never ask for your bank password and we can never
-          move your money.
+          Your statement is sent securely to be read, and is not kept anywhere else. The results
+          are saved only on this device. We never ask for your bank password and we can never move
+          your money.
         </p>
       </div>
-
-      <p className="mt-6 text-base text-muted-foreground">
-        This is a demonstration version. Whatever file you choose, we show you a realistic example
-        South African statement so you can see how the app works.
-      </p>
     </AppShell>
   );
 }
