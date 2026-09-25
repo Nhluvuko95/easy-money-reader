@@ -79,9 +79,14 @@ function setState(next: State) {
 }
 
 export function addStatement(statement: Statement) {
+  // Once a real statement is added, remove the example statements so only the user's money shows.
+  const kept =
+    statement.source === "upload"
+      ? state.statements.filter((s) => s.source !== "demo")
+      : state.statements;
   setState({
     ...state,
-    statements: [statement, ...state.statements],
+    statements: [statement, ...kept],
     lastStatementId: statement.id,
   });
 }
